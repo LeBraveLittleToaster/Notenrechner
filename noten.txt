@@ -1,3 +1,3 @@
-Fach2|8|2.3
-Fach3|2|3.5
-Fach1|4|1.0
+Subject1|4|4.0
+Subject2|20|1.3
+Subject3|12|3.5

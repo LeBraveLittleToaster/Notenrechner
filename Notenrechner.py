@@ -15,8 +15,9 @@ def sortByThirdElement(val):
 
 def main(argv):
     lpThreshold = 90
+    fileName = 'noten.txt'
     try:
-        opts, args = getopt.getopt(argv, "t:a")
+        opts, args = getopt.getopt(argv, "t:af:")
     except getopt.GetoptError:
         print("Failed")
         sys.exit(2)
@@ -27,8 +28,11 @@ def main(argv):
         elif opt == '-t':
             print("t Found, t=" + arg)
             lpThreshold = float(arg)
+        elif opt == '-f':
+            print("f found, f=" + arg)
+            fileName = str(arg)
       
-    with open('noten.txt') as csv_file:
+    with open(fileName) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter='|')
         marks = []
         print("Reading marks...")
@@ -39,7 +43,7 @@ def main(argv):
         marks.sort(key=sortByThirdElement)
         printMarks(marks)
 
-        print("Calculating average mark...")
+        print("\nCalculating average mark...\n")
         lpCount = 0
         markSum = 0.0
         listOfUsedSubjects = []
@@ -55,7 +59,9 @@ def main(argv):
                 listOfUsedSubjects.append((mark[0], (lpThreshold - lpCount), mark[2]))
                 lpCount = lpThreshold
         printMarks(listOfUsedSubjects)
+        print("\n++++++++++++++++++++++++++++++++++++++++++\n")
         print("Average mark: " + str((markSum / lpCount)))
+        print("\n++++++++++++++++++++++++++++++++++++++++++\n")
 
 
 if __name__ == "__main__":
